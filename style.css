@@ -32,4 +32,28 @@
     height: 200%;
     cursor: pointer;
     transform: translate(-25%, -25%)
-  }
+}
+
+button {
+    background-color: rgb(241, 241, 241);
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 5px;
+    width: 70px;
+}
+
+button:hover {
+    transform: scale(1.05);
+    border-color: rgb(107, 103, 103);
+}
+button.active {
+    background-color: rgb(53, 53, 53);
+    color: white;
+}
+
+.btn_group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
