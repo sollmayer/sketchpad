@@ -1,0 +1,9 @@
+.sketchpad {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    width: 450px;
+    height: 450px;
+    margin: auto;
+    border: 3px solid black
+}
