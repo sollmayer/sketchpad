@@ -9,30 +9,25 @@ window.addEventListener('load', ()=> {
 
     const pencil_btn = document.querySelector('.pencil');
     const eraser_btn = document.querySelector('.eraser');
+    const clear_btn = document.querySelector('.clear_btn');
     // const random_btn = document.querySelector('.random');
     pencil_btn.addEventListener('click', ()=>changeMode('pencil'))
     eraser_btn.addEventListener('click', ()=>changeMode('eraser'))
     // random_btn.addEventListener('click', ()=>changeMode('random'))
+    clear_btn.addEventListener('click', createGrid)
 })
-
 
 
 let current_mode = 'pencil';
 function changeMode(mode){
     if(mode !== current_mode){
-        document.getElementsByName(current_mode)[0].classList.remove('active')
+        document.getElementsByName(current_mode)[0].classList.remove('active');
         current_mode = mode;
-        document.getElementsByName(mode)[0].classList.add('active')
+        document.getElementsByName(mode)[0].classList.add('active');
     }
     console.log(current_mode)
 }
 
-// let btn_selected = false;
-// document.addEventListener('click', (e)=>{
-//     if(e.target.matches('.btn_group input')) {
-        
-//     }
-// })
 let mouseDown;
 function createGrid() {
     const grid_div = document.querySelectorAll('.sketchpad div');
