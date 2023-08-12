@@ -1,21 +1,33 @@
-/* .sketchpad {
-    display: flex;
-    flex-wrap: wrap;
-    align-content: flex-start;
-    width: 500px;
-    height: 500px;
-    margin: auto;
-    border: 3px solid black
-} */
+body{
+    background-color: rgb(235, 235, 235);
+}
 
+.container {
+    display: flex;
+    justify-content: center;
+}
+.toolbar_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.toolbar { 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    background-color: rgb(210, 210, 210);
+    border-radius: 10px;
+}
 .sketchpad {
     display: grid;
     grid-template-rows: repeat(16,1fr);
     grid-template-columns: repeat(16,1fr);
-    width: 500px;
-    height: 500px;
-    margin: auto;
-    border: 3px solid black;
+    width: 550px;
+    height: 550px;
+    margin-left: 20px;
+    box-shadow: 0px 5px 10px rgb(156, 156, 156);
 }
 
 .color_input {
@@ -23,6 +35,7 @@
     height: 50px;
     border-radius: 50px;
     overflow: hidden;
+    /* box-shadow: 0px 0px 5px rgb(142, 142, 142); */
   }
   
   [type="color"] {
@@ -31,15 +44,18 @@
     width: 200%;
     height: 200%;
     cursor: pointer;
-    transform: translate(-25%, -25%)
+    transform: translate(-25%, -25%);
+    
 }
 
 button {
     background-color: rgb(241, 241, 241);
     border: 1px solid black;
     border-radius: 3px;
-    padding: 5px;
-    width: 70px;
+    /* padding: 6px; */
+    width: 90px;
+    height: 30px;
+    /* font-size: 13px; */
 }
 
 button:hover {
@@ -56,4 +72,10 @@ button.active {
     flex-direction: column;
     gap: 10px;
     margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+h1{
+    text-align: center;
+    font-size: 3em;
 }
