@@ -1,5 +1,7 @@
 let size = 16;
-// let buttons = document.querySelectorAll('.buttons button');
+let current_mode = 'pencil';
+let color;
+
 window.addEventListener('load', ()=> {
     createGrid();
     
@@ -17,7 +19,6 @@ window.addEventListener('load', ()=> {
     // zoomOut_btn.addEventListener('click', zoomOut);
     document.querySelector('input[type="range"]').addEventListener('input', (e)=> {
         document.querySelector('label[for="sizeR"]').textContent = `${e.target.value}x${e.target.value}`
-        // setSize(e);
     })
     document.querySelector('input[type="range"]').addEventListener('change', (e)=>setSize(e))
 
@@ -39,7 +40,7 @@ function setSize(e){
 // }
 
 
-let current_mode = 'pencil';
+
 function changeMode(mode){
     if(mode !== current_mode){
         document.getElementsByName(current_mode)[0].classList.remove('active');
@@ -58,8 +59,6 @@ function createGrid() {
     sketchpad.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
     for(let i = 0; i<size*size; i++){
         let div = document.createElement('div');
-        // div.style.width = `${sketchpad.clientWidth / size}px`;
-        // div.style.height = `${sketchpad.clientWidth /size}px`;
         div.style.backgroundColor = 'white';
         sketchpad.appendChild(div);
     }
@@ -77,7 +76,7 @@ function addGridListener(grid_div){
     })
 }   
 
-let color;
+
 function changeColor(e){
     color = document.querySelector('input[type="color"]').value
     if(current_mode === 'pencil'){
@@ -91,10 +90,3 @@ function changeColor(e){
         }
     }
 }
-
-
-
-
-// document.querySelectorAll('.buttons button').forEach(elem => {
-//     elem.addEventListener('click', ()=> {elem.classList.add('1')})
-// });
