@@ -8,14 +8,18 @@
     <title>Document</title>
 </head>
 <body>
-    <input type="number" name="size" id="size" value="16">
+    <!-- <input type="number" name="size" id="size" value="16" min="1" max="64"> -->
     <div class="color_input">
         <input type="color">
     </div>
+    <label for="sizeR">16x16</label>
+    <input type="range" name="size" id="size" value='16' max="100" min="1">
     <div class="btn_group">
         <button class="pencil active" name="pencil">Pencil</button>
         <button class="eraser" name="eraser">Eraser</button>
         <button class="clear_btn" name="clear">Clear</button>
+        <!-- <button class="zoomIn_btn" name="zoomIn">ZoomIn</button>
+        <button class="zoomOut_btn" name="zoomOut">ZoomOut</button> -->
         <!-- <button class="random" name="random">Random</button> -->
     </div>
     <div class="sketchpad"></div>
