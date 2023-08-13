@@ -92,9 +92,7 @@ function changeColor(e){
                 let target_alpha = Math.round(target[0]*10)/10;
                 let prev_color =  e.target.style.backgroundColor;
                 e.target.style.backgroundColor = color + `${Math.floor((target_alpha + 0.1) * 255).toString(16)}`;
-                if(target_alpha === 0 && hexToRGB(color) !== e.target.style.backgroundColor){
-                    console.log(e.target.style.backgroundColor)
-                    console.log(color)
+                if(target_alpha === 0){
                     e.target.style.backgroundColor = prev_color;
                 }
                
