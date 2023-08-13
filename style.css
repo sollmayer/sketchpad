@@ -21,6 +21,7 @@ body{
     border-radius: 10px;
 }
 .sketchpad {
+    flex-shrink: 0;
     display: grid;
     grid-template-rows: repeat(16,1fr);
     grid-template-columns: repeat(16,1fr);
@@ -35,7 +36,6 @@ body{
     height: 50px;
     border-radius: 50px;
     overflow: hidden;
-    /* box-shadow: 0px 0px 5px rgb(142, 142, 142); */
   }
   
   [type="color"] {
@@ -52,10 +52,8 @@ button {
     background-color: rgb(241, 241, 241);
     border: 1px solid black;
     border-radius: 3px;
-    /* padding: 6px; */
     width: 90px;
     height: 30px;
-    /* font-size: 13px; */
 }
 
 button:hover {
