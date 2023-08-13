@@ -2,25 +2,27 @@ let size = 16;
 let current_mode = 'pencil';
 let color;
 
+
 window.addEventListener('load', ()=> {
     createGrid();
     
     const pencil_btn = document.querySelector('.pencil');
     const eraser_btn = document.querySelector('.eraser');
+    const random_btn = document.querySelector('.randomColor');
+    const shading_btn = document.querySelector('.shading');
     const clear_btn = document.querySelector('.clear_btn');
-    // const zoomIn_btn = document.querySelector('.zoomIn_btn');
-    // const zoomOut_btn = document.querySelector('.zoomOut_btn');
-    // const random_btn = document.querySelector('.random');
+
     pencil_btn.addEventListener('click', ()=>changeMode('pencil'))
     eraser_btn.addEventListener('click', ()=>changeMode('eraser'))
-    // random_btn.addEventListener('click', ()=>changeMode('random'))
+    random_btn.addEventListener('click', ()=>changeMode('randomColor'))
+    shading_btn.addEventListener('click', ()=>changeMode('shading'))
     clear_btn.addEventListener('click', createGrid);
-    // zoomIn_btn.addEventListener('click', zoomIn);
-    // zoomOut_btn.addEventListener('click', zoomOut);
-    document.querySelector('input[type="range"]').addEventListener('input', (e)=> {
+
+    const size_slider = document.querySelector('input[type="range"]');
+    size_slider.addEventListener('input', (e)=> {
         document.querySelector('label[for="sizeR"]').textContent = `${e.target.value}x${e.target.value}`
     })
-    document.querySelector('input[type="range"]').addEventListener('change', (e)=>setSize(e))
+    size_slider.addEventListener('change', (e)=>setSize(e))
 
 })
 function setSize(e){
@@ -28,17 +30,6 @@ function setSize(e){
     document.querySelector('input[type="range"]').value = e.target.value;
     createGrid();
 }
-// function zoomIn(){
-//     let grid = document.querySelector('.sketchpad');
-//     grid.style.width = `${grid.clientWidth + 100}px`;
-//     grid.style.height = `${grid.clientHeight + 100}px`;
-// }
-// function zoomOut(){
-//     let grid = document.querySelector('.sketchpad');
-//     grid.style.width = `${grid.clientWidth - 100}px`;
-//     grid.style.height = `${grid.clientHeight - 100}px`;
-// }
-
 
 
 function changeMode(mode){
@@ -47,7 +38,6 @@ function changeMode(mode){
         current_mode = mode;
         document.getElementsByName(mode)[0].classList.add('active');
     }
-    console.log(current_mode)
 }
 
 let mouseDown;
@@ -63,14 +53,15 @@ function createGrid() {
         sketchpad.appendChild(div);
     }
     addGridListener(document.querySelectorAll('.sketchpad div'));
+
     document.body.addEventListener('mousedown', () => mouseDown = true);
     document.body.addEventListener('mouseup', () => mouseDown = false);
 }
 
 function addGridListener(grid_div){
     grid_div.forEach(div => {
-        div.addEventListener('mousedown', changeColor);
-        div.addEventListener('mouseover', changeColor);
+        div.addEventListener('mousedown', (e)=>{changeColor(e)});
+        div.addEventListener('mouseover', (e)=>{changeColor(e)});
         div.addEventListener('dragstart', (e)=>{e.preventDefault()})
         div.addEventListener('drop', (e)=>{e.preventDefault()})
     })
@@ -78,7 +69,7 @@ function addGridListener(grid_div){
 
 
 function changeColor(e){
-    color = document.querySelector('input[type="color"]').value
+    color = document.querySelector('input[type="color"]').value;
     if(current_mode === 'pencil'){
         if(e.type === 'mouseover' && mouseDown || e.type === 'mousedown'){
             e.target.style.backgroundColor = color;
@@ -88,5 +79,29 @@ function changeColor(e){
         if(e.type === 'mouseover' && mouseDown || e.type === 'mousedown'){
             e.target.style.backgroundColor = color;
         }
+    }else if (current_mode === 'randomColor'){
+        color = `rgb(${Math.random()*255},${Math.random()*255},${Math.random()*255})`;
+        if(e.type === 'mouseover' && mouseDown || e.type === 'mousedown'){
+            e.target.style.backgroundColor = color;
+        }
+    }else if (current_mode === 'shading'){
+        let alpha = 0.1;
+        if(e.type === 'mouseover' && mouseDown || e.type === 'mousedown'){
+            if(e.target.style.backgroundColor.match(/[^,]+(?=\))/)){
+                let target = e.target.style.backgroundColor.match(/[^,]+(?=\))/);
+                let target_alpha = Math.round(target[0]*10)/10;
+                let prev_color =  e.target.style.backgroundColor;
+                e.target.style.backgroundColor = color + `${Math.floor((target_alpha + 0.1) * 255).toString(16)}`;
+                if(target_alpha === 0 && hexToRGB(color) !== e.target.style.backgroundColor){
+                    console.log(e.target.style.backgroundColor)
+                    console.log(color)
+                    e.target.style.backgroundColor = prev_color;
+                }
+               
+            }else{
+                e.target.style.backgroundColor = color + `${Math.floor(alpha * 255).toString(16)}`;
+            }
+        }
     }
+
 }
